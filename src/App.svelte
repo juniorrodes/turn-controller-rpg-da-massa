@@ -36,14 +36,19 @@
   }
 </script>
 
-<main class="container mx-auto text-slate-300 flex gap-3 flex-col">
-  {#each playersValue as playerV }
-    <Slider player={playerV} />
-  {/each}
-  
-  <button class="bg-slate-600 flex-1 rounded-sm" on:click={() => (showModal = true)}>Add character</button>
-  <button class="bg-slate-600 flex-1 rounded-sm" on:click={advanceTurn}>Advance turn</button>
-  <Modal bind:showModal>
-    <PlayerForm />
-  </Modal>
+<Modal bind:showModal>
+  <PlayerForm />
+</Modal>
+
+<main class="h-screen justify-between items-center flex flex-col mx-auto">
+  <div class="container text-slate-300 flex gap-3 flex-col h-fit">
+    {#each playersValue as playerV }
+      <Slider player={playerV} />
+    {/each}
+  </div>
+  <div class="container text-slate-300 flex gap-3 flex-col h-fit">
+    
+    <button class="bg-slate-600 flex-1 rounded-sm" on:click={() => (showModal = true)}>Add character</button>
+    <button class="bg-slate-600 flex-1 rounded-sm" on:click={advanceTurn}>Advance turn</button>
+  </div>
 </main>
