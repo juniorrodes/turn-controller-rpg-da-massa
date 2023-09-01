@@ -1,6 +1,7 @@
 <script lang="ts">
   import './App.css';
   import Slider from './lib/Slider.svelte';
+  import fs from 'fs';
   import PlayerForm from './lib/PlayerForm.svelte';
   import { players, type Player } from './types/player';
   import Modal from './lib/Modal.svelte';
@@ -9,9 +10,13 @@
   let showModal: boolean = false;
   let playerForm: boolean = false;
   let incrementForm: boolean = false;
+  
   players.subscribe(value => {
     playersValue = value
+
+    localStorage.setItem('state', JSON.stringify(value));
   })
+
 
   function advanceTurn(e: Event) {
     e.preventDefault()
