@@ -1,5 +1,6 @@
 <script lang="ts">
     import { players, type Player } from "../types/player";
+    import TiTrash from 'svelte-icons/ti/TiTrash.svelte'
 
     export let player: Player;
     let points: number = 0;
@@ -10,6 +11,12 @@
             v[index].actionPoints += action === 'add' ? points : - points;
 
             return v;
+        })
+    }
+
+    function removePlayer() {
+        players.update((v) => {
+            return v.filter((p) => p.name != player.name);
         })
     }
 </script>
@@ -27,4 +34,5 @@
     <div class="bg-slate-600 rounded-md h-3 flex-1">
         <div class="h-full w-2 relative rounded-lg bg-black" style="left: {player.actionPoints}%;"></div>
     </div>
+    <button class="w-8" on:click|preventDefault={removePlayer}><TiTrash /></button>
 </div>
