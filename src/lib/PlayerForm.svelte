@@ -29,7 +29,4 @@
 
         <button class="bg-slate-600 flex-1 rounded-sm">Add character</button>
     </form>
-
-    <!-- <div class="flex gap-4 flex-row flex-1"> -->
-    <!-- </div> -->
 </div>
