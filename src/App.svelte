@@ -10,7 +10,7 @@
   let showModal: boolean = false;
   let playerForm: boolean = false;
   let incrementForm: boolean = false;
-  
+
   players.subscribe(value => {
     playersValue = value
 
@@ -19,12 +19,11 @@
 
 
   function advanceTurn(e: Event) {
-    e.preventDefault()
     players.update(p => {
       let playerLeastAP = p.reduce((previous, current) => {
         return current.actionPoints > previous.actionPoints ? previous : current
       });
-      let zeroPointsPlayers = p.filter((v) => v.actionPoints <= 0);
+      let zeroPointsPlayers = p.filter((v) => v.actionPoints === 0);
       if (zeroPointsPlayers.length > 0) {
         let message: string = "This players have 0 points\n";
         zeroPointsPlayers.forEach((v) => {
@@ -35,7 +34,10 @@
       }
       
       return p.map((v) => {
-         return { name: v.name, actionPoints: (v.actionPoints - playerLeastAP.actionPoints)}
+         return { 
+          name: v.name,
+          actionPoints: (v.actionPoints - playerLeastAP.actionPoints)
+        }
       })
     })
   }
@@ -54,6 +56,6 @@
   <div class="container text-slate-300 flex gap-3 flex-col h-fit">
     
     <button class="bg-slate-600 flex-1 rounded-sm" on:click={() => (showModal = true)}>Add character</button>
-    <button class="bg-slate-600 flex-1 rounded-sm" on:click={advanceTurn}>Advance turn</button>
+    <button class="bg-slate-600 flex-1 rounded-sm" on:click|preventDefault={advanceTurn}>Advance turn</button>
   </div>
 </main>
