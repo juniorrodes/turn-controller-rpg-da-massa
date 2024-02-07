@@ -1,15 +1,12 @@
 <script lang="ts">
   import './App.css';
   import Slider from './lib/Slider.svelte';
-  import fs from 'fs';
   import PlayerForm from './lib/PlayerForm.svelte';
   import { players, type Player } from './types/player';
   import Modal from './lib/Modal.svelte';
 
   let playersValue: Player[];
   let showModal: boolean = false;
-  let playerForm: boolean = false;
-  let incrementForm: boolean = false;
 
   players.subscribe(value => {
     playersValue = value
@@ -47,7 +44,7 @@
   <PlayerForm />
 </Modal>
 
-<main class="h-screen justify-between items-center flex flex-col mx-auto">
+<main class="h-screen justify-between items-center p-5 flex flex-col mx-auto">
   <div class="container text-slate-300 flex gap-3 flex-col h-fit">
     {#each playersValue as playerV }
       <Slider player={playerV} />
